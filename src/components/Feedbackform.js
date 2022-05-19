@@ -1,8 +1,10 @@
 import Card from "./shared/Card"
 import Button from "./shared/Button";
+import Rating from "./Rating";
 import { useState } from "react"
 export default function Feedbackform() {
   const [text, setText] = useState('');
+  const[rating, setRating] = useState(10);
   const [disables, setDisable] = useState(true);
   const [flash, setFlash] = useState('');
   const handleTextchange= (e)=>{
@@ -24,6 +26,7 @@ export default function Feedbackform() {
 
   return (
    <Card>
+     <Rating picked={(n)=> console.log(n)}/>
      <form> 
      <h2>Please type the rating</h2>
      <div className="input-group">
