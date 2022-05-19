@@ -2,9 +2,9 @@ import Card from "./shared/Card"
 import Button from "./shared/Button";
 import Rating from "./Rating";
 import { useState } from "react"
-export default function Feedbackform() {
+export default function Feedbackform({newData}) {
   const [text, setText] = useState('');
-  const[rating, setRating] = useState(10);
+  const[rating, setRating] = useState();
   const [disables, setDisable] = useState(true);
   const [flash, setFlash] = useState('');
   const handleTextchange= (e)=>{
@@ -23,11 +23,22 @@ export default function Feedbackform() {
     setText(e.target.value);
   }
 
+  const pleaseSubmit = (e)=>{
+    e.preventDefault();
+   const k = {
+     id: rating,
+     text: text,
+   }
+
+   newData(k);
+    
+  }
+
 
   return (
    <Card>
-     <Rating picked={(n)=> console.log(n)}/>
-     <form> 
+     <Rating picked={(n)=> setRating(n)}/>
+     <form onSubmit={pleaseSubmit}> 
      <h2>Please type the rating</h2>
      <div className="input-group">
       <input onChange={handleTextchange} type="text" placeholder="Write a review" value={text}/>
